@@ -6,9 +6,17 @@ import { InputForm } from './InputForm';
 import { editTodo, deleteTodo } from "./redux/actions/todos";
 
 const Todo = (props) => {
-    const { todo, editTodoAct, deleteTodoAct } = props;
+    const { todo, editTodoAct, deleteTodoAct, themeBool } = props;
 
     const [toggle, setToggleOn] = useState(false);
+
+    const theme = StyleSheet.create({
+        basic: {
+            backgroundColor: themeBool ? '#fff' : '#000',
+            color: themeBool ? '#000' : '#fff',
+            borderColor: themeBool ? '#000' : '#fff'
+        }
+    });
 
     const onChange = () => {
         setToggleOn(pre => !pre);
@@ -19,15 +27,24 @@ const Todo = (props) => {
             id: todo.id,
             title: text
         };
-
         editTodoAct(newTodo);
     };
 
     return (
-        <View style={StyleSheet.compose(styles.todo)}>
+        <View style={StyleSheet.compose(theme.basic, styles.todo)}>
             {!toggle ?
-                <TodoTitle changeForm = {onChange} todo = {todo} onDelete = {deleteTodoAct}/> :
-                <InputForm changeForm = {onChange} todo = {todo} onEdit = {onEdit}/>}
+                <TodoTitle
+                    changeForm = {onChange}
+                    todo = {todo}
+                    onDelete = {deleteTodoAct}
+                    theme={themeBool}
+                    styleTheme={theme}/> :
+                <InputForm
+                    changeForm = {onChange}
+                    todo = {todo}
+                    onEdit = {onEdit}
+                    theme={themeBool}
+                    styleTheme={theme}/>}
         </View>
     )
 };
@@ -42,6 +59,12 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapStateToProps = state => {
+    return {
+        themeBool: state.stateReducer.theme
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         editTodoAct: todo => dispatch(editTodo(todo)),
@@ -49,4 +72,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps) (Todo);
+export default connect(mapStateToProps, mapDispatchToProps) (Todo);

@@ -1,7 +1,8 @@
-import { ADD_NEW_TODO, EDIT_TODO, DELETE_TODO } from '../constants/types';
+import { ADD_NEW_TODO, EDIT_TODO, DELETE_TODO, CHANGE_THEME } from '../constants/types';
 
 const initialState = {
-    todos: []
+    todos: [],
+    theme: true
 };
 
 export function stateReducer (state = initialState, action) {
@@ -23,6 +24,12 @@ export function stateReducer (state = initialState, action) {
             return {
                 ...state,
                 todos: state.todos.filter(todo => todo.id !== action.id)
+            };
+
+        case CHANGE_THEME:
+            return {
+                ...state,
+                theme: action.bool
             };
 
         default:

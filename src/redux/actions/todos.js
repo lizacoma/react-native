@@ -1,4 +1,4 @@
-import { ADD_NEW_TODO, EDIT_TODO, DELETE_TODO } from '../constants/types';
+import { ADD_NEW_TODO, EDIT_TODO, DELETE_TODO, CHANGE_THEME } from '../constants/types';
 
 export function addNewTodo(todo) {
     return {
@@ -18,5 +18,12 @@ export function deleteTodo(id) {
     return {
         type: DELETE_TODO,
         id
+    }
+}
+
+export function changeTheme(bool) {
+    return {
+        type: CHANGE_THEME,
+        bool
     }
 }

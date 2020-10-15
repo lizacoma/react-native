@@ -2,24 +2,24 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableHighlight, TouchableWithoutFeedback} from 'react-native';
 
 export const TodoTitle = (props) => {
-const { todo, onDelete, changeForm } = props;
+const { todo, onDelete, changeForm, styleTheme } = props;
 
     return (
-        <View style={styles.todo}>
+        <View style={StyleSheet.compose(styleTheme.basic, styles.todo)}>
             <TouchableWithoutFeedback
                 onPress={changeForm}>
-                <Text style={styles.todoTitle}>
+                <Text style={StyleSheet.compose(styleTheme.basic, styles.todoTitle)}>
                     {todo.title}
                 </Text>
             </TouchableWithoutFeedback>
 
             <TouchableHighlight
-                style={styles.button}
+                style={StyleSheet.compose(styleTheme.basic, styles.button)}
                 activeOpacity={0.6}
                 underlayColor="#DDDDDD"
                 onPress={() => onDelete(todo.id)}>
                 <View accessibilityRole = 'button'>
-                    <Text style={styles.buttonText}>
+                    <Text style={StyleSheet.compose(styleTheme.basic, styles.buttonText)}>
                         &#10006;
                     </Text>
                 </View>

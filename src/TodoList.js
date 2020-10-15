@@ -2,21 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Navbar } from './Navbar';
+import Navbar from './Navbar';
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
 
 const TodoList = (props) => {
     const { state, todos } = props;
-    // const [themeNow, setTheme] = useState(true);
-
-    // const changeTheme = () => {
-    //     setTheme(pre => !pre);
-    // };
 
     return (
             <View style={StyleSheet.compose(
-                // themeNow ? theme.lightTheme : theme.darkTheme,
                 styles.container)}>
 
                 <Navbar title='Todo list'/>

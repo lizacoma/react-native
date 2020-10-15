@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableHighlight} from 'react-native';
 
 export const InputForm = (props) => {
-    const { todo, onEdit, changeForm } = props;
+    const { todo, onEdit, changeForm, styleTheme } = props;
 
     const [text, setText] = useState(todo.title);
 

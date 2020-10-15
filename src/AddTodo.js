@@ -4,7 +4,16 @@ import { connect } from 'react-redux';
 import { addNewTodo } from './redux/actions/todos';
 
 const AddTodo = (props) => {
+    const { themeBool, addTodo } = props;
     const [text, setText] = useState('');
+
+    const theme = StyleSheet.create({
+        basic: {
+            backgroundColor: themeBool ? '#fff' : '#000',
+            color: themeBool ? '#000' : '#fff',
+            borderColor: themeBool ? '#000' : '#fff'
+        }
+    });
 
     const handleChange = (text) => {
         if(text != '') setText(text);
@@ -16,14 +25,14 @@ const AddTodo = (props) => {
             title: text
         };
 
-        props.addTodo(newTodo);
+        addTodo(newTodo);
         setText('');
     };
 
     return (
-        <View style={StyleSheet.compose(styles.block)}>
+        <View style={StyleSheet.compose(theme.basic, styles.block)}>
                 <TextInput
-                    style={styles.input}
+                    style={StyleSheet.compose(theme.basic, styles.input)}
                     value={text}
                     onChangeText={text => handleChange(text)}
                 />
@@ -34,7 +43,7 @@ const AddTodo = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={handleSubmit}>
                 <View accessibilityRole = 'button'>
-                    <Text style={styles.buttonText}>
+                    <Text style={StyleSheet.compose(theme.basic, styles.buttonText)}>
                         add
                     </Text>
                 </View>
@@ -68,10 +77,16 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapStateToProps = state => {
+    return {
+        themeBool: state.stateReducer.theme
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         addTodo: todo => dispatch(addNewTodo(todo))
     };
 };
 
-export default connect(null, mapDispatchToProps) (AddTodo);
+export default connect(mapStateToProps, mapDispatchToProps) (AddTodo);
