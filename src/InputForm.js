@@ -18,8 +18,9 @@ export const InputForm = (props) => {
     return (
         <View style={styles.todo}>
             <TextInput
-                style={styles.input}
+                style={StyleSheet.compose(styleTheme.basic, styles.input)}
                 value={text}
+                autoFocus={true}
                 onChangeText={text => handleChange(text)}
             />
             <View accessibilityRole = 'button' style={styles.buttonWrap}>
@@ -29,7 +30,7 @@ export const InputForm = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={() => handleSubmit()}>
 
-                    <Text style={styles.buttonText}>
+                    <Text style={StyleSheet.compose(styleTheme.button, styles.buttonText)}>
                         &#10003;
                     </Text>
 
@@ -40,8 +41,7 @@ export const InputForm = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={changeForm}>
 
-                    <Text style={styles.buttonText}>
-
+                    <Text style={StyleSheet.compose(styleTheme.button, styles.buttonText)}>
                         &#10006;
                     </Text>
 

@@ -19,7 +19,7 @@ const { todo, onDelete, changeForm, styleTheme } = props;
                 underlayColor="#DDDDDD"
                 onPress={() => onDelete(todo.id)}>
                 <View accessibilityRole = 'button'>
-                    <Text style={StyleSheet.compose(styleTheme.basic, styles.buttonText)}>
+                    <Text style={StyleSheet.compose(styleTheme.button, styles.buttonText)}>
                         &#10006;
                     </Text>
                 </View>

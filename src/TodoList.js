@@ -10,24 +10,23 @@ const TodoList = (props) => {
     const { state, todos } = props;
 
     return (
-            <View style={StyleSheet.compose(
-                styles.container)}>
+            <View style={StyleSheet.compose(styles.container)}>
 
                 <Navbar title='Todo list'/>
-                <AddTodo/>
+                <View style={styles.darkWrap}>
+                    <AddTodo/>
 
-                <View>
-                    { todos.map(todo => {
-                        return <Todo key={todo.id} todo={todo}/>
-                    })
-                    }
+                    <View>
+                        { todos.map(todo => {
+                            return <Todo key={todo.id} todo={todo}/>
+                        })
+                        }
+                    </View>
                 </View>
             </View>
     );
 
 };
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -35,6 +34,16 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: '#000',
+    },
+    darkWrap: {
+        backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#000',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center'
     },
     text: {
         fontSize: 26

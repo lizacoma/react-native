@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { addNewTodo } from './redux/actions/todos';
+import { styles } from './style/todo-list'
 
 const AddTodo = (props) => {
     const { themeBool, addTodo } = props;
@@ -12,6 +13,11 @@ const AddTodo = (props) => {
             backgroundColor: themeBool ? '#fff' : '#000',
             color: themeBool ? '#000' : '#fff',
             borderColor: themeBool ? '#000' : '#fff'
+        },
+        button: {
+            backgroundColor: !themeBool ? '#fff' : '#000',
+            color: !themeBool ? '#000' : '#fff',
+            borderColor: !themeBool ? '#000' : '#fff'
         }
     });
 
@@ -34,6 +40,7 @@ const AddTodo = (props) => {
                 <TextInput
                     style={StyleSheet.compose(theme.basic, styles.input)}
                     value={text}
+                    autoFocus={true}
                     onChangeText={text => handleChange(text)}
                 />
 
@@ -52,30 +59,33 @@ const AddTodo = (props) => {
     )
 };
 
-const styles = StyleSheet.create({
-    block: {
-        marginHorizontal: 10,
-        marginVertical: 10,
-        flexDirection: 'row'
-    },
-    input: {
-        width: '80%',
-        padding: 10,
-        paddingHorizontal: 20,
-        fontSize: 19,
-        borderStyle: 'solid',
-        borderWidth: 1,
-    },
-    button: {
-        width: '20%'
-    },
-    buttonText: {
-        textAlign: 'center',
-        fontWeight: '700',
-        fontSize: 20,
-        paddingVertical: 10
-    }
-});
+// const styles = StyleSheet.create({
+//     block: {
+//         marginHorizontal: 10,
+//         marginVertical: 10,
+//         flexDirection: 'row'
+//     },
+//     input: {
+//         width: '80%',
+//         padding: 10,
+//         paddingHorizontal: 20,
+//         fontSize: 19,
+//         borderStyle: 'solid',
+//         borderWidth: 1,
+//     },
+//     button: {
+//         width: '20%'
+//     },
+//     buttonText: {
+//         marginLeft: 2,
+//         textAlign: 'center',
+//         fontWeight: '700',
+//         fontSize: 20,
+//         paddingVertical: 11,
+//         borderStyle: 'solid',
+//         borderWidth: 1,
+//     }
+// });
 
 const mapStateToProps = state => {
     return {

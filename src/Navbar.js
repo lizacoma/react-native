@@ -11,6 +11,11 @@ const Navbar = (props) => {
             backgroundColor: themeBool ? '#fff' : '#000',
             color: themeBool ? '#000' : '#fff',
             borderColor: themeBool ? '#000' : '#fff'
+        },
+        button: {
+            backgroundColor: !themeBool ? '#fff' : '#000',
+            color: !themeBool ? '#000' : '#fff',
+            borderColor: !themeBool ? '#000' : '#fff'
         }
     });
 
@@ -25,8 +30,8 @@ const Navbar = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={() => changeTheme(!themeBool)}>
                 <View>
-                    <Text style={StyleSheet.compose(theme.basic, styles.buttonText)}>
-                        {themeBool ? 'light' : 'dark'}
+                    <Text style={StyleSheet.compose(theme.button, styles.buttonText)}>
+                        {!themeBool ? 'light on' : 'dark on'}
                     </Text>
                 </View>
             </TouchableHighlight>
@@ -49,7 +54,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '700',
         fontSize: 20,
-        paddingVertical: 10
+        padding: 5,
+        paddingHorizontal: 15,
+        borderRadius: 5
     }
 });
 

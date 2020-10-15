@@ -15,6 +15,11 @@ const Todo = (props) => {
             backgroundColor: themeBool ? '#fff' : '#000',
             color: themeBool ? '#000' : '#fff',
             borderColor: themeBool ? '#000' : '#fff'
+        },
+        button: {
+            backgroundColor: !themeBool ? '#fff' : '#000',
+            color: !themeBool ? '#000' : '#fff',
+            borderColor: !themeBool ? '#000' : '#fff'
         }
     });
 
