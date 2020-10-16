@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableHighlight} from 'react-native';
+import { styles, todoInputBlock } from './style/todo-list';
 
 export const InputForm = (props) => {
     const { todo, onEdit, changeForm, styleTheme } = props;
@@ -16,32 +17,30 @@ export const InputForm = (props) => {
     };
 
     return (
-        <View style={styles.todo}>
+        <View style={todoInputBlock.wrap}>
             <TextInput
                 style={StyleSheet.compose(styleTheme.basic, styles.input)}
                 value={text}
                 autoFocus={true}
                 onChangeText={text => handleChange(text)}
             />
-            <View accessibilityRole = 'button' style={styles.buttonWrap}>
+            <View accessibilityRole = 'button'
+                  style={styles.buttonWrap}>
             <TouchableHighlight
-                style={styles.button}
                 activeOpacity={0.6}
                 underlayColor="#DDDDDD"
                 onPress={() => handleSubmit()}>
-
-                    <Text style={StyleSheet.compose(styleTheme.button, styles.buttonText)}>
+                    <Text style={StyleSheet.compose(styleTheme.button, todoInputBlock.button)}>
                         &#10003;
                     </Text>
-
             </TouchableHighlight>
+
             <TouchableHighlight
-                style={styles.button}
                 activeOpacity={0.6}
                 underlayColor="#DDDDDD"
                 onPress={changeForm}>
 
-                    <Text style={StyleSheet.compose(styleTheme.button, styles.buttonText)}>
+                    <Text style={StyleSheet.compose(styleTheme.button, todoInputBlock.button)}>
                         &#10006;
                     </Text>
 
@@ -50,32 +49,15 @@ export const InputForm = (props) => {
          </View>
     )
 };
-
-const styles = StyleSheet.create({
-    todo: {
-        padding: 10,
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between'
-    },
-    todoTitle: {
-        width: '80%',
-        fontSize: 23,
-        // color: '#7e529f',
-        fontWeight: '700'
-    },
-    buttonWrap: {
-        flexDirection: 'row'
-    },
-    button: {
-        margin: 1,
-        // backgroundColor: '#8565c5'
-    },
-    buttonText: {
-        // color: '#fff',
-        fontSize: 15,
-        fontWeight: '700',
-        paddingVertical: 5,
-        paddingHorizontal: 10
-    }
-});
+//
+// const styles = StyleSheet.create({
+//
+//
+//     buttonText: {
+//         // color: '#fff',
+//         fontSize: 15,
+//         fontWeight: '700',
+//         paddingVertical: 5,
+//         paddingHorizontal: 10
+//     }
+// });

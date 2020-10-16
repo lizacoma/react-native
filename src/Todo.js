@@ -4,24 +4,12 @@ import {View, Text, StyleSheet, TextInput, Button, TouchableHighlight} from 'rea
 import { TodoTitle } from './TodoTitle';
 import { InputForm } from './InputForm';
 import { editTodo, deleteTodo } from "./redux/actions/todos";
+import { styles, darkTheme, lightTheme } from './style/todo-list';
 
 const Todo = (props) => {
     const { todo, editTodoAct, deleteTodoAct, themeBool } = props;
-
     const [toggle, setToggleOn] = useState(false);
-
-    const theme = StyleSheet.create({
-        basic: {
-            backgroundColor: themeBool ? '#fff' : '#000',
-            color: themeBool ? '#000' : '#fff',
-            borderColor: themeBool ? '#000' : '#fff'
-        },
-        button: {
-            backgroundColor: !themeBool ? '#fff' : '#000',
-            color: !themeBool ? '#000' : '#fff',
-            borderColor: !themeBool ? '#000' : '#fff'
-        }
-    });
+    const basicStyle = themeBool ? lightTheme : darkTheme;
 
     const onChange = () => {
         setToggleOn(pre => !pre);
@@ -36,33 +24,24 @@ const Todo = (props) => {
     };
 
     return (
-        <View style={StyleSheet.compose(theme.basic, styles.todo)}>
+        <View style={StyleSheet.compose(basicStyle.basic, styles.todo)}>
             {!toggle ?
                 <TodoTitle
                     changeForm = {onChange}
                     todo = {todo}
                     onDelete = {deleteTodoAct}
                     theme={themeBool}
-                    styleTheme={theme}/> :
+                    styleTheme={basicStyle}/> :
                 <InputForm
                     changeForm = {onChange}
                     todo = {todo}
                     onEdit = {onEdit}
                     theme={themeBool}
-                    styleTheme={theme}/>}
+                    styleTheme={basicStyle}/>}
         </View>
     )
 };
 
-const styles = StyleSheet.create({
-    todo: {
-        margin: 5,
-        flexDirection: 'row',
-        width: '90%',
-        borderStyle: 'solid',
-        borderWidth: 1
-    }
-});
 
 const mapStateToProps = state => {
     return {

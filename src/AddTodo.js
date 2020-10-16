@@ -2,24 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { addNewTodo } from './redux/actions/todos';
-import { styles } from './style/todo-list'
+import { styles, darkTheme, lightTheme } from './style/todo-list';
 
 const AddTodo = (props) => {
     const { themeBool, addTodo } = props;
     const [text, setText] = useState('');
+    const basicStyle = themeBool ? lightTheme : darkTheme;
 
-    const theme = StyleSheet.create({
-        basic: {
-            backgroundColor: themeBool ? '#fff' : '#000',
-            color: themeBool ? '#000' : '#fff',
-            borderColor: themeBool ? '#000' : '#fff'
-        },
-        button: {
-            backgroundColor: !themeBool ? '#fff' : '#000',
-            color: !themeBool ? '#000' : '#fff',
-            borderColor: !themeBool ? '#000' : '#fff'
-        }
-    });
+
 
     const handleChange = (text) => {
         if(text != '') setText(text);
@@ -36,9 +26,9 @@ const AddTodo = (props) => {
     };
 
     return (
-        <View style={StyleSheet.compose(theme.basic, styles.block)}>
+        <View style={StyleSheet.compose(basicStyle.input, styles.block)}>
                 <TextInput
-                    style={StyleSheet.compose(theme.basic, styles.input)}
+                    style={StyleSheet.compose(basicStyle.input, styles.input)}
                     value={text}
                     autoFocus={true}
                     onChangeText={text => handleChange(text)}
@@ -50,7 +40,7 @@ const AddTodo = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={handleSubmit}>
                 <View accessibilityRole = 'button'>
-                    <Text style={StyleSheet.compose(theme.basic, styles.buttonText)}>
+                    <Text style={StyleSheet.compose(basicStyle.button, styles.buttonText)}>
                         add
                     </Text>
                 </View>

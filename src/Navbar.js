@@ -2,26 +2,15 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import { connect } from "react-redux";
 import { changeTheme } from './redux/actions/todos';
+import { styles, darkTheme, lightTheme } from './style/todo-list';
 
 const Navbar = (props) => {
     const { title, themeBool, changeTheme } = props;
-
-    const theme = StyleSheet.create({
-        basic: {
-            backgroundColor: themeBool ? '#fff' : '#000',
-            color: themeBool ? '#000' : '#fff',
-            borderColor: themeBool ? '#000' : '#fff'
-        },
-        button: {
-            backgroundColor: !themeBool ? '#fff' : '#000',
-            color: !themeBool ? '#000' : '#fff',
-            borderColor: !themeBool ? '#000' : '#fff'
-        }
-    });
+    const basicStyle = themeBool ? lightTheme : darkTheme;
 
     return (
-        <View style={StyleSheet.compose(theme.basic, styles.navbar)}>
-            <Text style={StyleSheet.compose(theme.basic, styles.text)}>
+        <View style={StyleSheet.compose(basicStyle.basic, styles.navbar)}>
+            <Text style={StyleSheet.compose(basicStyle.basic, styles.navText)}>
                 {title}
             </Text>
             <TouchableHighlight
@@ -30,7 +19,7 @@ const Navbar = (props) => {
                 underlayColor="#DDDDDD"
                 onPress={() => changeTheme(!themeBool)}>
                 <View>
-                    <Text style={StyleSheet.compose(theme.button, styles.buttonText)}>
+                    <Text style={StyleSheet.compose(basicStyle.button, styles.buttonText)}>
                         {!themeBool ? 'light on' : 'dark on'}
                     </Text>
                 </View>
@@ -39,30 +28,8 @@ const Navbar = (props) => {
     )
 };
 
-
-
-const styles = StyleSheet.create({
-    navbar:{
-        width: '100%',
-        alignItems: 'center',
-        padding: 15
-    },
-    text:{
-        fontSize: 24
-    },
-    buttonText: {
-        textAlign: 'center',
-        fontWeight: '700',
-        fontSize: 20,
-        padding: 5,
-        paddingHorizontal: 15,
-        borderRadius: 5
-    }
-});
-
 const mapStateToProps = state => {
     return {
-        state,
         themeBool: state.stateReducer.theme
     };
 };
