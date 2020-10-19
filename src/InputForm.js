@@ -30,7 +30,8 @@ export const InputForm = (props) => {
                 activeOpacity={0.6}
                 underlayColor="#DDDDDD"
                 onPress={() => handleSubmit()}>
-                    <Text style={StyleSheet.compose(styleTheme.button, todoInputBlock.button)}>
+                    <Text
+                        style={StyleSheet.compose(styleTheme.button, todoInputBlock.button)}>
                         &#10003;
                     </Text>
             </TouchableHighlight>
@@ -49,15 +50,3 @@ export const InputForm = (props) => {
          </View>
     )
 };
-//
-// const styles = StyleSheet.create({
-//
-//
-//     buttonText: {
-//         // color: '#fff',
-//         fontSize: 15,
-//         fontWeight: '700',
-//         paddingVertical: 5,
-//         paddingHorizontal: 10
-//     }
-// });

@@ -28,6 +28,11 @@ export const darkTheme = StyleSheet.create({
         backgroundColor: '#000',
         color: '#fff',
         borderColor: '#fff'
+    },
+    input: {
+        backgroundColor: '#fff',
+        color: '#000',
+        borderColor: '#000'
     }
 });
 
@@ -40,7 +45,6 @@ export const styles = StyleSheet.create({
     input: {
         width: '80%',
         padding: 10,
-        paddingHorizontal: 20,
         fontSize: 19,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -54,7 +58,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '700',
         fontSize: 20,
-        paddingVertical: 11,
+        paddingVertical: 10,
         borderStyle: 'solid',
         borderWidth: 1,
         borderRadius: 5
@@ -86,7 +90,8 @@ export const styles = StyleSheet.create({
     },
     navText:{
         fontSize: 24,
-        fontWeight: '700'
+        fontWeight: '700',
+        paddingBottom: 10
     },
     todoInput: {
         padding: 10,
@@ -95,6 +100,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between'
 
     }
+
 });
 
 export const todoTitleBlock = StyleSheet.create({
@@ -121,13 +127,9 @@ export const todoTitleBlock = StyleSheet.create({
 export const todoInputBlock = StyleSheet.create({
     wrap: {
         margin: 5,
-        paddingRight: 5,
         flexDirection: 'row',
         maxWidth: '100%',
         justifyContent: 'space-between'
-    },
-    input: {
-        width: '80%',
     },
     button: {
         margin: 1,

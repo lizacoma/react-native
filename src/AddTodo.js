@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, Button, Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { connect } from 'react-redux';
 import { addNewTodo } from './redux/actions/todos';
 import { styles, darkTheme, lightTheme } from './style/todo-list';
+// import DateTimePicker from "react-native-modal-datetime-picker";
 
 const AddTodo = (props) => {
     const { themeBool, addTodo } = props;
     const [text, setText] = useState('');
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
     const basicStyle = themeBool ? lightTheme : darkTheme;
-
-
 
     const handleChange = (text) => {
         if(text != '') setText(text);
@@ -25,7 +28,28 @@ const AddTodo = (props) => {
         setText('');
     };
 
+    // const handleDatePicked = date => {
+    //     // console.log("A date has been picked: ", date);
+    //     setDatePickerVisible(false)
+    // };
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'android');
+        setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
     return (
+        <View>
         <View style={StyleSheet.compose(basicStyle.input, styles.block)}>
                 <TextInput
                     style={StyleSheet.compose(basicStyle.input, styles.input)}
@@ -46,36 +70,21 @@ const AddTodo = (props) => {
                 </View>
             </TouchableHighlight>
         </View>
+            <View>
+            <Button title="запланувати" onPress={showDatepicker}/>
+                {show && (<DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                />)}
+            </View>
+
+        </View>
     )
 };
-
-// const styles = StyleSheet.create({
-//     block: {
-//         marginHorizontal: 10,
-//         marginVertical: 10,
-//         flexDirection: 'row'
-//     },
-//     input: {
-//         width: '80%',
-//         padding: 10,
-//         paddingHorizontal: 20,
-//         fontSize: 19,
-//         borderStyle: 'solid',
-//         borderWidth: 1,
-//     },
-//     button: {
-//         width: '20%'
-//     },
-//     buttonText: {
-//         marginLeft: 2,
-//         textAlign: 'center',
-//         fontWeight: '700',
-//         fontSize: 20,
-//         paddingVertical: 11,
-//         borderStyle: 'solid',
-//         borderWidth: 1,
-//     }
-// });
 
 const mapStateToProps = state => {
     return {

@@ -29,23 +29,3 @@ export const TodoTitle = (props) => {
         </View>
     )
 };
-
-// const styles = StyleSheet.create({
-//     todo: {
-//         padding: 10,
-//         flexDirection: 'row',
-//         width: '100%',
-//         justifyContent: 'space-between'
-//     },
-//     todoTitle: {
-//         width: '80%',
-//         fontSize: 23,
-//         fontWeight: '700'
-//     },
-//     buttonText: {
-//         fontSize: 15,
-//         fontWeight: '700',
-//         paddingVertical: 5,
-//         paddingHorizontal: 10
-//     }
-// });
