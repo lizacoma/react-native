@@ -10,6 +10,7 @@ const Todo = (props) => {
     const { todo, editTodoAct, deleteTodoAct, themeBool } = props;
     const [toggle, setToggleOn] = useState(false);
     const basicStyle = themeBool ? lightTheme : darkTheme;
+    const dateAndTime = todo.date.toString();
 
     const onChange = () => {
         setToggleOn(pre => !pre);
@@ -37,7 +38,14 @@ const Todo = (props) => {
                     todo = {todo}
                     onEdit = {onEdit}
                     theme={themeBool}
-                    styleTheme={basicStyle}/>}
+                    styleTheme={basicStyle}/>
+            }
+                    <View>
+                        <Text>date: {dateAndTime.substring(0, 15)}</Text>
+                    </View>
+                    <View>
+                        <Text>time: {dateAndTime.substring(16, 21)}</Text>
+                    </View>
         </View>
     )
 };

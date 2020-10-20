@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     },
     todo: {
         margin: 5,
-        flexDirection: 'row',
+        // flexDirection: 'row',
         width: '87%',
         borderStyle: 'solid',
         borderWidth: 1
