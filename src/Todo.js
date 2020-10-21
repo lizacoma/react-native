@@ -18,7 +18,7 @@ const Todo = (props) => {
 
     const onEdit = (text) => {
         const newTodo = {
-            id: todo.id,
+            ...todo,
             title: text
         };
         editTodoAct(newTodo);
@@ -40,11 +40,13 @@ const Todo = (props) => {
                     theme={themeBool}
                     styleTheme={basicStyle}/>
             }
-                    <View>
-                        <Text>date: {dateAndTime.substring(0, 15)}</Text>
-                    </View>
-                    <View>
-                        <Text>time: {dateAndTime.substring(16, 21)}</Text>
+                    <View style={StyleSheet.compose({paddingBottom: 10})}>
+                        <Text style={StyleSheet.compose(basicStyle.basic, styles.todoDate)}>
+                            date: {dateAndTime.substring(0, 15)}
+                        </Text>
+                        <Text style={StyleSheet.compose(basicStyle.basic, styles.todoDate)}>
+                            time: {dateAndTime.substring(16, 21)}
+                        </Text>
                     </View>
         </View>
     )

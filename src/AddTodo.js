@@ -7,98 +7,11 @@ import { styles, darkTheme, lightTheme } from './style/todo-list';
 // import DateTimePicker from "react-native-modal-datetime-picker";
 
 const AddTodo = (props) => {
-    // const { themeBool, addTodo } = props;
-    //
-    // const [text, setText] = useState('');
-    // const [date, setDate] = useState(new Date(1598051730000));
-    // // const initialState = {
-    // //     id: Date.now().toString(),
-    // //     title: text,
-    // //     date: date,
-    // //     time: ''
-    // // };
-    //
-    // // const [newTodo, setNewTodo] = useState(initialState);
-    //
-    // const [mode, setMode] = useState('date');
-    // const [show, setShow] = useState(false);
-    //
-    // const basicStyle = themeBool ? lightTheme : darkTheme;
-    //
-    // const handleChangeText = (text) => {
-    //     if(text !== '') setText(text);
-    //     // console.log('show:', show);
-    // };
-    //
-    // const showMode = (currentMode) => {
-    //     setShow(true);
-    //     setMode(currentMode);
-    // };
-    //
-    // const showDatepicker = () => {
-    //     console.log(show);
-    //     showMode('date');
-    // };
-    //
-    // const changeData = (event, selectedDate) => {
-    //     const currentDate = selectedDate || date;
-    //     setShow(Platform.OS === 'android');
-    //     setDate(currentDate);
-    //     // console.log('show changeData:', show);
-    //     // setNewTodo({...newTodo, date: currentDate});
-    // };
-    //
-    // const handleSubmit = () => {
-    //     // if(text !== '' ) addTodo(newTodo);
-    //     // setText('');
-    //     console.log('date:', date, 'text:', text);
-    // };
-
-    //
-    // return (
-    //     <View>
-    //         {/*<Text>*/}
-    //         {/*    {console.log(newTodo)}*/}
-    //         {/*</Text>*/}
-    //     <View style={StyleSheet.compose(basicStyle.input, styles.block)}>
-    //         <TextInput
-    //             style={StyleSheet.compose(basicStyle.input, styles.input)}
-    //             value={text}
-    //             autoFocus={true}
-    //             onChangeText={text => handleChangeText(text)}
-    //         />
-    //
-    //         <TouchableHighlight
-    //             style={styles.button}
-    //             activeOpacity={0.6}
-    //             underlayColor="#DDDDDD"
-    //             onPress={handleSubmit}>
-    //             <View accessibilityRole = 'button'>
-    //                 <Text style={StyleSheet.compose(basicStyle.button, styles.buttonText)}>
-    //                     add
-    //                 </Text>
-    //             </View>
-    //         </TouchableHighlight>
-    //     </View>
-    //         <View>
-    //         <Button title="запланувати" onPress={showDatepicker}/>
-    //             {show ?
-    //                 <DateTimePicker
-    //                     testID="dateTimePicker"
-    //                     value={date}
-    //                     mode={mode}
-    //                     is24Hour={true}
-    //                     display="default"
-    //                     onChange={changeData}
-    //             /> : <Text> '' </Text>}
-    //         </View>
-    //     </View>
-    // )
     const { themeBool, addTodo, state } = props;
     const basicStyle = themeBool ? lightTheme : darkTheme;
 
     const [text, setText] = useState('');
-    const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -106,24 +19,25 @@ const AddTodo = (props) => {
         setText(text);
     };
 
+    const changeDateAndTime = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        setShow(false); //?? in the example was "Platform.OS === 'ios'", why?
+    };
+
     const showMode = (currentMode) => {
-        setShow(true);
         setMode(currentMode);
+       if(show === false) setShow(true);
     };
 
     const showDatepicker = () => {
         showMode('date');
+        // console.log('date mode!')
     };
 
     const showTimepicker = () => {
         showMode('time');
-    };
-
-    const changeDateAndTime = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-        setShow(false); //?? was "Platform.OS === 'ios'"
-        console.log('date:', currentDate, 'show:', show, 'mode:', mode);
+        // console.log('time mode!')
     };
 
     const handleSubmit = () => {
@@ -132,9 +46,19 @@ const AddTodo = (props) => {
             title: text,
             date: date
         }
-        if(text !== '' ) addTodo(newTodo);
-        setText('');
-        console.log('newTodo:', newTodo, 'state:', state.stateReducer.todos);
+        const dateNow = new Date().toString().substring(0, 21);
+
+        if(text === '') { //if input is empty
+            alert('Add text!');
+        } else {
+            if (date.toString().substring(0, 21) === dateNow) {
+                alert('Change date!');
+            } else {
+                addTodo(newTodo);
+                setText('');
+                setDate(new Date());
+            };
+        };
     };
 
 
@@ -145,6 +69,7 @@ const AddTodo = (props) => {
                     style={StyleSheet.compose(basicStyle.input, styles.input)}
                     value={text}
                     autoFocus={true}
+                    placeholder='add todo...'
                     onChangeText={text => handleChangeText(text)}
                 />
 
@@ -172,13 +97,13 @@ const AddTodo = (props) => {
                 <DateTimePicker
                     testID="dateTimePicker"
                     value={date}
+                    minimumDate={new Date()}
                     mode={mode}
                     is24Hour={true}
                     display="default"
                     onChange={changeDateAndTime}
                 />
             )}
-            {console.log(show, mode, date, text)}
         </View>
     );
 };

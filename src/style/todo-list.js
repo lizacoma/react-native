@@ -83,6 +83,10 @@ export const styles = StyleSheet.create({
         fontSize: 23,
         fontWeight: '700'
     },
+    todoDate: {
+        paddingHorizontal:5,
+        fontSize: 15
+    },
     navbar:{
         width: '100%',
         alignItems: 'center',
